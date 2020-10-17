@@ -1,0 +1,65 @@
+
+# Name(string): Name of the user.
+# GuessNumber(int): A counter for number of guesses of this user.
+# Turn(boolean): Is it the turn for this user(True or False)
+
+class Player:
+
+
+
+
+    def __init__(self,name, turn, guess_number):
+        self.name = name
+        self.turn = turn
+        self.guess_number = guess_number
+
+    @classmethod
+    def create_player(cls, x):
+        name, turn, guess_number = x.split('-')
+        return cls(name, turn, int(guess_number))
+
+
+
+
+how_many = int(input('How many players : '))
+playr_List = []
+for i in range(how_many):
+    x = input('name --> ') + '-False-0'
+    e = Player.create_player(x)
+    playr_List.append(e)
+
+
+
+playr_List[0].turn = True
+
+maxi = int(input('max: '))
+mini = int(input('min: '))
+
+x = random.randrange(mini,maxi+1)
+
+
+a = True
+index = 0
+while a == True:
+    for i in playr_List:
+        print()
+        print('Guessed ' + str(i.guess_number) + ' times already')
+        if i.turn == True:
+            print(i.name +' making a guess')
+            guess = int(input(' --> '))
+            i.guess_number += 1
+            index += 1
+            playr_List[index % how_many].turn = True
+            if guess == x:
+                print(i.name + ' found the answer')
+                a = False
+                break
+
+            elif x > guess >= mini:
+                print('HIGHER')
+
+            elif x < guess <= maxi:
+                print('LOWER')
+
+            else:
+                print('Invalid Value')
