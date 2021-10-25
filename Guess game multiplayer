@@ -3,6 +3,9 @@
 # GuessNumber(int): A counter for number of guesses of this user.
 # Turn(boolean): Is it the turn for this user(True or False)
 
+import random
+
+
 class Player:
 
 
